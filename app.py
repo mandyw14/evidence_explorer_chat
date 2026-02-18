@@ -10,9 +10,13 @@ from Bio import Entrez
 # -----------------------------
 # Server-side NCBI config
 # -----------------------------
-Entrez.email = os.getenv("NCBI_EMAIL", "")
-Entrez.api_key = os.getenv("NCBI_API_KEY", None)
-TOOL_NAME = os.getenv("NCBI_TOOL", "BONF_PublicPubMedSearch")  # optional label
+#Entrez.email = os.getenv("NCBI_EMAIL", "")
+#Entrez.api_key = os.getenv("NCBI_API_KEY", None)
+#TOOL_NAME = os.getenv("NCBI_TOOL", "BONF_PublicPubMedSearch")  # optional label
+
+ncbi_email = st.secrets.get("NCBI_EMAIL", "")
+ncbi_key = st.secrets.get("NCBI_API_KEY", None)
+tool_name = st.secrets.get("NCBI_TOOL", "BONF_PublicPubMedSearch")
 
 st.set_page_config(page_title="PubMed Search", layout="wide")
 st.title("PubMed Search")
