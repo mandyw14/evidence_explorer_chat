@@ -288,7 +288,7 @@ else:
     condition = selected_condition
 
 intervention_categories = {
-    "Mind-body / movement": [
+    "Mind-body": [
         "exercise",
         "physical activity",
         "mindfulness",
