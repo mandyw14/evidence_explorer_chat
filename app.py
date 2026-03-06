@@ -279,9 +279,9 @@ intervention_categories = {
         "creatine",
         "curcumin",
         "supplements",
-        "fecal transplants"
-        "psilocybin"
-        "mushrooms"
+        "fecal transplants",
+        "psilocybin",
+        "mushrooms",
     ],
     "Neurotechnology": [
         "transcranial magnetic stimulation",
@@ -292,7 +292,7 @@ intervention_categories = {
         "vagus nerve stimulation",
         "functional electrical stimulation",
         "virtual reality therapy",
-        "augmented reality therapy".     
+        "augmented reality therapy",     
     ],
 }
 
