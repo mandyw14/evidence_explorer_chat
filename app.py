@@ -19,6 +19,7 @@ st.set_page_config(page_title="PubMed Search: MS + Exercise", layout="wide")
 st.title("PubMed Search Tool DEMO: Multiple Sclerosis")
 st.caption("Public search interface powered by NCBI PubMed (Entrez)")
 st.caption("Developed by Branch Out Neurological Foundation")
+st.caption("This search is being conducted on journal articles of the National Library of Medicine, PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, life science journals, and online books. Citations may include links to full text content from PubMed Central and publisher web sites.")
 
 
 # -----------------------------
