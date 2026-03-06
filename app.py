@@ -33,8 +33,7 @@ st.caption(
     "This search prioritizes human clinical studies, clinical trials, reviews, and evidence syntheses "
     "published in English within the past 10 years."
 )
-st.image("https://branchoutfoundation.com/wp-content/uploads/logo.png", width=200)
-
+st.logo("logo.png")
 
 # -----------------------------
 # Secrets / credentials (server-side)
