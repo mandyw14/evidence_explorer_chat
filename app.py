@@ -143,9 +143,9 @@ def efetch_details(pmids: list[str]) -> pd.DataFrame:
 
         rows.append(
             {
+                "Title": title,
                 "PMID": pmid,
                 "Year": year,
-                "Title": title,
                 "Journal": journal,
                 "Authors": authors,
                 "DOI": doi,
