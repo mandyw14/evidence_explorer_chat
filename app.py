@@ -20,6 +20,7 @@ from Bio import Entrez
 # Streamlit page config
 # -----------------------------
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
+st.image("https://branchoutfoundation.com/wp-content/uploads/logo.png", width=200)
 st.title("PubMed Search Tool")
 st.caption("Public search interface powered by NCBI PubMed (Entrez)")
 st.caption("Developed by Branch Out Neurological Foundation")
