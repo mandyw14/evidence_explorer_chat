@@ -1,3 +1,4 @@
+# Version 1: Included the first interactive box so user can include whatever neurological disorder they want to search for.
 # app.py
 # Public-facing PubMed search for Streamlit Community Cloud
 # Users can type any neurological condition, and the app builds the PubMed query automatically.
