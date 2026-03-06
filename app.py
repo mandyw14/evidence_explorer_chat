@@ -144,10 +144,10 @@ def efetch_details(pmids: list[str]) -> pd.DataFrame:
         rows.append(
             {
                 "Title": title,
-                "PMID": pmid,
                 "Year": year,
                 "Journal": journal,
                 "Authors": authors,
+                "PMID": pmid,
                 "DOI": doi,
             }
         )
