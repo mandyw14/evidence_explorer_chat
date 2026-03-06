@@ -169,7 +169,7 @@ st.sidebar.header("Search settings")
  #   'AND ("exercise"[Title/Abstract] OR "exercise"[MeSH Terms] OR "physical activity"[Title/Abstract])'
 #)
 #default_query = (
-    '("multiple sclerosis"[Title/Abstract] OR "multiple sclerosis"[MeSH Terms]) '
+'("multiple sclerosis"[Title/Abstract] OR "multiple sclerosis"[MeSH Terms]) '
     AND ("exercise"[MeSH Terms] OR "mindfulness"[MeSH Terms]) 
     AND ((y_10[Filter]) AND (clinicalstudy[Filter] OR clinicaltrial[Filter] 
     OR meta-analysis[Filter] OR randomizedcontrolledtrial[Filter] OR review[Filter] OR scopingreview[Filter] OR systematicreview[Filter] OR validationstudy[Filter]) AND (humans[Filter]) AND (english[Filter])
