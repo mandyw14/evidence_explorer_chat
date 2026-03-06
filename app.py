@@ -33,7 +33,7 @@ st.caption(
     "This search prioritizes human clinical studies, clinical trials, reviews, and evidence syntheses "
     "published in English within the past 10 years."
 )
-st.logo("logo.png")
+#st.logo("logo.png")
 
 # -----------------------------
 # Secrets / credentials (server-side)
