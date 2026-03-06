@@ -1,3 +1,4 @@
+# Version 2: Drop-down menu for neurological disorders, cleaned up version, 
 # app.py
 # Public-facing PubMed search for Streamlit Community Cloud
 # Users can choose a common neurological condition from a dropdown or type their own.
