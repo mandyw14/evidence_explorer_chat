@@ -331,6 +331,7 @@ intervention_categories = {
         "fecal transplants",
         "psilocybin",
         "mushrooms",
+        "ibogaine",
     ],
     "Neurotechnology": [
         "transcranial magnetic stimulation",
