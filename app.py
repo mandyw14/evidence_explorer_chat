@@ -244,7 +244,7 @@ st.sidebar.header("Search settings")
 
 mode = st.radio(
     "Search mode",
-    ["Simple", "Advanced"],
+    ["Simple", "See Search Terms"],
     horizontal=True,
     help="Simple mode uses friendly menus only. Advanced mode lets you edit the full PubMed query."
 )
