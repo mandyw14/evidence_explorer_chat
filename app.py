@@ -307,7 +307,7 @@ selected_category = st.selectbox(
 default_interventions = intervention_categories[selected_category][:2]
 
 interventions = st.multiselect(
-    "Intervention term(s)",
+    "Choose intervention term(s)",
     options=intervention_categories[selected_category],
     default=default_interventions,
     help="Choose one or more intervention terms to include in the search.",
