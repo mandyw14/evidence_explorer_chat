@@ -1,3 +1,4 @@
+## V0 --> the first iteration. bare bones only done with MS
 # app.py
 # Public-facing PubMed search (MS + exercise) for Streamlit Community Cloud
 # Uses Streamlit Secrets for NCBI credentials, adds caching + simple rate limiting.
