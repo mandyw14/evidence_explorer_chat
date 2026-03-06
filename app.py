@@ -20,7 +20,7 @@ st.title("PubMed Search Tool DEMO: Multiple Sclerosis")
 st.caption("Public search interface powered by NCBI PubMed (Entrez)")
 st.caption("Developed by Branch Out Neurological Foundation")
 st.caption("This search is being conducted on journal articles of the National Library of Medicine, PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, life science journals, and online books. Citations may include links to full text content from PubMed Central and publisher web sites.")
-
+st.caption("Primary research articles are not included in this search. Only clinical trials, meta-analyzes, and reviews using humans are included.")
 
 # -----------------------------
 # Secrets / credentials (server-side)
