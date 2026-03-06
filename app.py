@@ -222,7 +222,6 @@ common_conditions = [
     "spinal cord injury",
     "Other / type your own",
 ]
-
 selected_condition = st.selectbox(
     "Choose a neurological condition",
     options=common_conditions,
