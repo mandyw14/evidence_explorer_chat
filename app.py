@@ -248,6 +248,23 @@ intervention_categories = {
         "tai chi",
         "qigong",
         "pilates",
+        "cognitive behavioral therapy",
+        "CBT",
+        "psychotherapy",
+        "behavior therapy",
+        "stress management",
+        "relaxation therapy",
+        "acceptance and commitment therapy",
+        "sleep intervention",
+        "sleep hygiene",
+        "fatigue management",
+        "acupuncture",
+        "massage",
+        "music therapy",
+        "art therapy",
+        "occupational therapy",
+        "physiotherapy",
+        "rehabilitation",
     ],
     "Nutraceuticals / diet": [
         "diet",
@@ -262,43 +279,20 @@ intervention_categories = {
         "creatine",
         "curcumin",
         "supplements",
+        "fecal transplants"
+        "psilocybin"
+        "mushrooms"
     ],
     "Neurotechnology": [
         "transcranial magnetic stimulation",
-        "TMS",
         "transcranial direct current stimulation",
-        "tDCS",
         "focused ultrasound",
         "neurofeedback",
         "biofeedback",
         "vagus nerve stimulation",
-    ],
-    "Psychological / behavioral": [
-        "cognitive behavioral therapy",
-        "CBT",
-        "psychotherapy",
-        "behavior therapy",
-        "stress management",
-        "relaxation therapy",
-        "acceptance and commitment therapy",
-    ],
-    "Sleep / recovery": [
-        "sleep",
-        "sleep intervention",
-        "sleep hygiene",
-        "circadian rhythm",
-        "rest",
-        "fatigue management",
-    ],
-    "Other / mixed": [
-        "acupuncture",
-        "massage",
-        "music therapy",
-        "art therapy",
-        "virtual reality",
-        "occupational therapy",
-        "physiotherapy",
-        "rehabilitation",
+        "functional electrical stimulation"
+        "virtual reality therapy",
+        "augmented reality therapy".     
     ],
 }
 
