@@ -222,6 +222,7 @@ common_conditions = [
     "spinal cord injury",
     "Other / type your own",
 ]
+
 selected_condition = st.selectbox(
     "Choose a neurological condition",
     options=common_conditions,
@@ -289,7 +290,7 @@ intervention_categories = {
         "neurofeedback",
         "biofeedback",
         "vagus nerve stimulation",
-        "functional electrical stimulation"
+        "functional electrical stimulation",
         "virtual reality therapy",
         "augmented reality therapy".     
     ],
