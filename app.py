@@ -3,7 +3,8 @@
 # Users can choose a neurological condition and intervention category,
 # and the app builds the PubMed query automatically.
 # Includes Simple vs Advanced mode, clickable PMID/DOI links,
-# Open in PubMed button, abstract preview expanders, and AI summaries.
+# Open in PubMed button, abstract preview expanders, AI summaries,
+# and an Evidence Snapshot section.
 
 from __future__ import annotations
 
@@ -142,6 +143,89 @@ def get_abstract_text(article: dict) -> str:
             parts.append(text)
 
     return "\n\n".join(parts).strip()
+
+
+# -----------------------------
+# Evidence Snapshot helpers
+# -----------------------------
+def classify_study_type(text: str) -> str:
+    t = (text or "").lower()
+
+    if any(x in t for x in ["meta-analysis", "systematic review", "scoping review"]):
+        return "Review"
+    if "review" in t:
+        return "Review"
+    if any(x in t for x in ["randomized", "randomised", "clinical trial", "trial"]):
+        return "Clinical trial"
+    if any(x in t for x in ["cohort", "cross-sectional", "case-control", "observational"]):
+        return "Observational"
+    if any(x in t for x in ["mouse", "mice", "rat", "rats", "murine", "animal model", "preclinical"]):
+        return "Preclinical"
+    if any(x in t for x in ["protocol", "study protocol"]):
+        return "Protocol"
+    return "Other"
+
+
+def classify_population(text: str) -> str:
+    t = (text or "").lower()
+
+    if any(x in t for x in ["mouse", "mice", "rat", "rats", "murine", "animal model", "preclinical"]):
+        return "Preclinical"
+    if any(
+        x in t
+        for x in [
+            "patient", "patients", "participant", "participants", "adult", "adults",
+            "child", "children", "adolescent", "adolescents", "human", "humans"
+        ]
+    ):
+        return "Human"
+    return "Unclear"
+
+
+def add_evidence_snapshot_columns(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        df = df.copy()
+        df["Study_Type"] = []
+        df["Population_Type"] = []
+        return df
+
+    df = df.copy()
+    combined_text = df["Title"].fillna("") + " " + df["Abstract"].fillna("")
+    df["Study_Type"] = combined_text.apply(classify_study_type)
+    df["Population_Type"] = combined_text.apply(classify_population)
+    return df
+
+
+def get_evidence_signal(df: pd.DataFrame) -> str:
+    if df.empty:
+        return "No evidence found"
+
+    human_count = (df["Population_Type"] == "Human").sum()
+    preclinical_count = (df["Population_Type"] == "Preclinical").sum()
+
+    if human_count > preclinical_count and human_count >= 5:
+        return "Mostly human"
+    if preclinical_count > human_count:
+        return "Mostly preclinical"
+    return "Mixed / unclear"
+
+
+def get_caution_label(df: pd.DataFrame) -> str:
+    if df.empty:
+        return "No evidence found"
+
+    review_count = (df["Study_Type"] == "Review").sum()
+    trial_count = (df["Study_Type"] == "Clinical trial").sum()
+    human_count = (df["Population_Type"] == "Human").sum()
+    preclinical_count = (df["Population_Type"] == "Preclinical").sum()
+
+    if trial_count >= 5 and human_count >= 5:
+        return "Moderate human evidence"
+    if review_count >= 5 and trial_count < 3:
+        return "Mostly review-level evidence"
+    if preclinical_count > human_count:
+        return "Promising but preliminary"
+    return "Sparse or mixed evidence"
 
 
 # -----------------------------
@@ -572,7 +656,52 @@ if search:
             st.exception(e)
             st.stop()
 
+    df = add_evidence_snapshot_columns(df)
     display_df = df.copy()
+
+    # -----------------------------
+    # Evidence Snapshot
+    # -----------------------------
+    st.subheader("Evidence Snapshot")
+
+    if df.empty:
+        st.info("No records found.")
+    else:
+        years = pd.to_numeric(df["Year"], errors="coerce").dropna()
+        year_range = f"{int(years.min())}-{int(years.max())}" if not years.empty else "Unknown"
+
+        top_study_type = df["Study_Type"].value_counts().idxmax() if not df["Study_Type"].dropna().empty else "N/A"
+        evidence_signal = get_evidence_signal(df)
+        caution_label = get_caution_label(df)
+
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("Total results", len(df))
+        col2.metric("Years covered", year_range)
+        col3.metric("Top study type", top_study_type)
+        col4.metric("Evidence signal", evidence_signal)
+
+        st.info(f"Evidence snapshot: {caution_label}")
+
+        study_type_counts = (
+            df["Study_Type"]
+            .value_counts(dropna=False)
+            .rename_axis("Study Type")
+            .reset_index(name="Count")
+        )
+        population_counts = (
+            df["Population_Type"]
+            .value_counts(dropna=False)
+            .rename_axis("Population Type")
+            .reset_index(name="Count")
+        )
+
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown("**Study type breakdown**")
+            st.dataframe(study_type_counts, use_container_width=True, hide_index=True)
+        with c2:
+            st.markdown("**Population breakdown**")
+            st.dataframe(population_counts, use_container_width=True, hide_index=True)
 
     st.dataframe(
         display_df,
@@ -590,7 +719,10 @@ if search:
                 display_text=r"https://doi\.org/(.*)",
             ),
         },
-        column_order=["Title", "Year", "Journal", "Authors", "PMID_URL", "DOI_URL"],
+        column_order=[
+            "Title", "Year", "Journal", "Authors",
+            "Study_Type", "Population_Type", "PMID_URL", "DOI_URL"
+        ],
         hide_index=True,
     )
 
@@ -663,6 +795,8 @@ if search:
             with st.expander(expander_title):
                 st.markdown(f"**Journal:** {row['Journal']}")
                 st.markdown(f"**Authors:** {row['Authors']}")
+                st.markdown(f"**Study type:** {row.get('Study_Type', 'Other')}")
+                st.markdown(f"**Population:** {row.get('Population_Type', 'Unclear')}")
                 if row.get("PMID"):
                     st.markdown(f"**PMID:** [{row['PMID']}]({row['PMID_URL']})")
                 if row.get("DOI"):
