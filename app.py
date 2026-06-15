@@ -580,39 +580,18 @@ if search:
         st.subheader("Evidence Snapshot")
         st.markdown(st.session_state.evidence_snapshot)
 
+      # -----------------------------
+    # Abstract previews
     # -----------------------------
-    # Matching articles
-    # -----------------------------
-    st.subheader("Matching Articles")
-
-    display_df = df.copy()
-
-    st.dataframe(
-        display_df,
-        use_container_width=True,
-        height=560,
-        column_config={
-            "PMID_URL": st.column_config.LinkColumn(
-                "PMID",
-                help="Open PubMed record",
-                display_text=r"https://pubmed\.ncbi\.nlm\.nih\.gov/(\d+)/",
-            ),
-            "DOI_URL": st.column_config.LinkColumn(
-                "DOI",
-                help="Open article DOI link",
-                display_text=r"https://doi\.org/(.*)",
-            ),
-        },
-        column_order=["Title", "Year", "Journal", "Authors", "PMID_URL", "DOI_URL"],
-        hide_index=True,
-    )
-
-    st.subheader("Abstract previews")
+    st.subheader("Abstract Previews")
+    st.caption("Showing up to 10 abstracts from the returned PubMed results.")
 
     if df.empty:
         st.info("No records found.")
     else:
-        for _, row in df.iterrows():
+        preview_df = df.head(10)
+
+        for _, row in preview_df.iterrows():
             expander_title = f"{row['Year']} — {row['Title']}"
 
             with st.expander(expander_title):
@@ -633,18 +612,22 @@ if search:
                 else:
                     st.caption("No abstract available in the PubMed record.")
 
+    # -----------------------------
+    # Download results
+    # -----------------------------
+    st.subheader("Download Results")
+
     filename_condition = clean_filename(condition)
     filename_category = clean_filename(selected_category)
 
     st.download_button(
-        "Download CSV",
+        "Download your results",
         data=df.drop(columns=["PMID_URL", "DOI_URL"], errors="ignore")
         .to_csv(index=False)
         .encode("utf-8"),
         file_name=f"pubmed_results_{filename_condition}_{filename_category}.csv",
         mime="text/csv",
     )
-
 
 # -----------------------------
 # Chatbot
