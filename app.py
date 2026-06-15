@@ -12,6 +12,7 @@ import pandas as pd
 import streamlit as st
 from Bio import Entrez
 from openai import OpenAI
+from dictionaries import COMMON_CONDITIONS, INTERVENTION_CATEGORIES
 
 
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
