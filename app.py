@@ -347,7 +347,7 @@ mode = st.radio(
     "Search mode",
     ["Simple", "Advanced"],
     horizontal=True,
-    help="Simple mode uses friendly menus only. Advanced mode lets you edit the full PubMed query.",
+    help="Simple mode uses friendly menus only. Advanced mode lets you add custom terms or edit the full PubMed query.",
 )
 
 common_conditions = [
@@ -494,12 +494,39 @@ auto_query = (
 )
 
 if mode == "Advanced":
-    st.subheader("Advanced query editor")
-    query = st.text_area(
-        "PubMed query",
-        value=auto_query,
-        height=180,
+    st.subheader("Advanced query builder")
+
+    user_terms = st.text_input(
+        "Add your own search terms",
+        value="",
+        help="Example: fatigue, cognition, inflammation, microbiome, sleep, quality of life",
     )
+
+    use_auto_query = st.checkbox(
+        "Include the selected condition and intervention filters",
+        value=True,
+    )
+
+    extra_terms = normalize_query(user_terms)
+
+    if use_auto_query:
+        if extra_terms:
+            query = f"{auto_query} AND ({extra_terms})"
+        else:
+            query = auto_query
+    else:
+        query = extra_terms
+
+    st.caption("Final PubMed query")
+    st.code(query, language="text")
+
+    with st.expander("Edit full PubMed query manually"):
+        query = st.text_area(
+            "PubMed query",
+            value=query,
+            height=180,
+        )
+
 else:
     query = auto_query
     st.subheader("Search summary")
@@ -520,12 +547,16 @@ search = st.button("Search", type="primary")
 # Run search
 # -----------------------------
 if search:
-    if not condition.strip():
+    if not condition.strip() and mode == "Simple":
         st.warning("Please choose or enter a neurological condition.")
         st.stop()
 
-    if not interventions:
+    if not interventions and mode == "Simple":
         st.warning("Please select at least one intervention term.")
+        st.stop()
+
+    if mode == "Advanced" and not normalize_query(query):
+        st.warning("Please enter search terms or include the selected filters.")
         st.stop()
 
     if not allow_search(max_per_minute=int(max_per_minute)):
@@ -548,11 +579,11 @@ if search:
             st.exception(e)
             st.stop()
 
-    st.success(
-        f'Found {total_count} total matches in PubMed for "{condition}" and the selected intervention(s). '
-        f"Displaying up to {len(pmids)}."
+    search_description = (
+        f'Found {total_count} total matches in PubMed. Displaying up to {len(pmids)}.'
     )
 
+    st.success(search_description)
     st.link_button("Open in PubMed Search", pubmed_search_url)
 
     time.sleep(0.2)
@@ -580,7 +611,7 @@ if search:
         st.subheader("Evidence Snapshot")
         st.markdown(st.session_state.evidence_snapshot)
 
-      # -----------------------------
+    # -----------------------------
     # Abstract previews
     # -----------------------------
     st.subheader("Abstract Previews")
@@ -628,6 +659,7 @@ if search:
         file_name=f"pubmed_results_{filename_condition}_{filename_category}.csv",
         mime="text/csv",
     )
+
 
 # -----------------------------
 # Chatbot
