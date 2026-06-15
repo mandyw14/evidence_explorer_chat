@@ -53,5 +53,7 @@ INTERVENTION_CATEGORIES = {
         "focused ultrasound",
         "neurofeedback",
         "biofeedback",
+        "deep brain stimulation"
     ],
+    
 }
