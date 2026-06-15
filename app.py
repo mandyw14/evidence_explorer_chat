@@ -48,7 +48,9 @@ if not Entrez.email:
     st.stop()
 
 if not OPENAI_API_KEY:
-    st.warning("OPENAI_API_KEY is missing. PubMed search will work, but evidence snapshot and chatbot will not.")
+    st.warning(
+        "OPENAI_API_KEY is missing. PubMed search will work, but evidence snapshot and chatbot will not."
+    )
 
 client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
@@ -571,6 +573,18 @@ if search:
         with st.spinner("Creating evidence snapshot…"):
             st.session_state.evidence_snapshot = summarize_pubmed_results(df, client)
 
+    # -----------------------------
+    # Evidence snapshot
+    # -----------------------------
+    if st.session_state.get("evidence_snapshot"):
+        st.subheader("Evidence Snapshot")
+        st.markdown(st.session_state.evidence_snapshot)
+
+    # -----------------------------
+    # Matching articles
+    # -----------------------------
+    st.subheader("Matching Articles")
+
     display_df = df.copy()
 
     st.dataframe(
@@ -630,14 +644,6 @@ if search:
         file_name=f"pubmed_results_{filename_condition}_{filename_category}.csv",
         mime="text/csv",
     )
-
-
-# -----------------------------
-# Evidence snapshot
-# -----------------------------
-if st.session_state.get("evidence_snapshot"):
-    st.subheader("Evidence Snapshot")
-    st.markdown(st.session_state.evidence_snapshot)
 
 
 # -----------------------------
