@@ -566,8 +566,8 @@ if not results_df.empty:
             else:
                 st.caption("No abstract available in the PubMed record.")
 
-    st.subheader("Download Results")
-    st.caption("You can download your search results and then read the abstracts at a later time.")
+    st.subheader("Save your Results")
+    st.caption("You can download your search results into a file so you can come back and read/review them at a later time.")
 
     file_stub = clean_filename(st.session_state.get("last_query", "pubmed_results"))
 
