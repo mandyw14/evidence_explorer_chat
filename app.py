@@ -12,8 +12,11 @@ import pandas as pd
 import streamlit as st
 from Bio import Entrez
 from openai import OpenAI
-from dictionaries import COMMON_CONDITIONS, INTERVENTION_CATEGORIES
 
+from dictionaries import (
+    COMMON_CONDITIONS,
+    INTERVENTION_CATEGORIES,
+)
 
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
 st.title("PubMed Search Tool")
@@ -350,32 +353,11 @@ mode = st.radio(
     help="Simple mode uses friendly menus only. Advanced mode lets you add custom terms or edit the full PubMed query.",
 )
 
-common_conditions = [
-    "multiple sclerosis",
-    "Parkinson disease",
-    "Alzheimer disease",
-    "dementia",
-    "epilepsy",
-    "migraine",
-    "stroke",
-    "traumatic brain injury",
-    "concussion",
-    "autism spectrum disorder",
-    "ADHD",
-    "depression",
-    "anxiety",
-    "chronic pain",
-    "neuropathy",
-    "amyotrophic lateral sclerosis",
-    "Huntington disease",
-    "cerebral palsy",
-    "spinal cord injury",
-    "Other / type your own",
-]
+options=COMMON_CONDITIONS
 
 selected_condition = st.selectbox(
     "Choose a neurological condition",
-    options=common_conditions,
+    options=COMMON_CONDITIONS,
     index=0,
 )
 
