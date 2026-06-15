@@ -494,12 +494,39 @@ auto_query = (
 )
 
 if mode == "Advanced":
-    st.subheader("Advanced query editor")
-    query = st.text_area(
-        "PubMed query",
-        value=auto_query,
-        height=180,
+    st.subheader("Advanced query builder")
+
+    user_terms = st.text_input(
+        "Add your own search terms",
+        value="",
+        help="Example: fatigue, cognition, inflammation, microbiome, sleep, quality of life"
     )
+
+    use_auto_query = st.checkbox(
+        "Include the selected condition and intervention filters",
+        value=True
+    )
+
+    extra_terms = normalize_query(user_terms)
+
+    if use_auto_query:
+        if extra_terms:
+            query = f"{auto_query} AND ({extra_terms})"
+        else:
+            query = auto_query
+    else:
+        query = extra_terms
+
+    st.caption("Final PubMed query")
+    st.code(query, language="text")
+
+    with st.expander("Edit full PubMed query manually"):
+        query = st.text_area(
+            "PubMed query",
+            value=query,
+            height=180,
+        )
+
 else:
     query = auto_query
     st.subheader("Search summary")
