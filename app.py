@@ -370,66 +370,7 @@ if selected_condition == "Other / type your own":
 else:
     condition = selected_condition
 
-intervention_categories = {
-    "Mind-body": [
-        "exercise",
-        "physical activity",
-        "mindfulness",
-        "meditation",
-        "yoga",
-        "tai chi",
-        "qigong",
-        "pilates",
-        "cognitive behavioral therapy",
-        "CBT",
-        "psychotherapy",
-        "behavior therapy",
-        "stress management",
-        "relaxation therapy",
-        "acceptance and commitment therapy",
-        "sleep intervention",
-        "sleep hygiene",
-        "fatigue management",
-        "acupuncture",
-        "massage",
-        "music therapy",
-        "art therapy",
-        "occupational therapy",
-        "physiotherapy",
-        "rehabilitation",
-    ],
-    "Nutraceuticals / diet": [
-        "diet",
-        "nutrition",
-        "ketogenic diet",
-        "Mediterranean diet",
-        "probiotics",
-        "prebiotics",
-        "omega-3",
-        "vitamin D",
-        "magnesium",
-        "creatine",
-        "curcumin",
-        "supplements",
-        "fecal transplants",
-        "psilocybin",
-        "mushrooms",
-        "ibogaine",
-    ],
-    "Neurotechnology": [
-        "transcranial magnetic stimulation",
-        "transcranial direct current stimulation",
-        "focused ultrasound",
-        "neurofeedback",
-        "biofeedback",
-        "vagus nerve stimulation",
-        "functional electrical stimulation",
-        "virtual reality therapy",
-        "augmented reality therapy",
-    ],
-}
-
-category_names = list(intervention_categories.keys())
+category_names = list(INTERVENTION_CATEGORIES.keys())
 
 selected_category = st.selectbox(
     "Choose an intervention category",
@@ -437,11 +378,13 @@ selected_category = st.selectbox(
     index=0,
 )
 
-default_interventions = intervention_categories[selected_category][:2]
+default_interventions = INTERVENTION_CATEGORIES[selected_category][:2]
+
+
 
 interventions = st.multiselect(
     "Choose intervention term(s)",
-    options=intervention_categories[selected_category],
+    options=INTERVENTION_CATEGORIES[selected_category],
     default=default_interventions,
 )
 
