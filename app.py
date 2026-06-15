@@ -1,6 +1,6 @@
 # app.py
 # Public-facing PubMed search for Streamlit Community Cloud
-# Includes evidence snapshot + chatbot interaction with returned PubMed results only.
+# Includes evidence snapshot + persistent results + chatbot.
 
 from __future__ import annotations
 
@@ -14,9 +14,6 @@ from Bio import Entrez
 from openai import OpenAI
 
 
-# -----------------------------
-# Streamlit page config
-# -----------------------------
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
 st.title("PubMed Search Tool")
 st.caption("Public search interface powered by NCBI PubMed (Entrez)")
@@ -70,6 +67,9 @@ if "pubmed_results_df" not in st.session_state:
 if "evidence_snapshot" not in st.session_state:
     st.session_state.evidence_snapshot = ""
 
+if "last_query" not in st.session_state:
+    st.session_state.last_query = ""
+
 
 # -----------------------------
 # Utilities
@@ -99,7 +99,7 @@ def clean_filename(text: str) -> str:
     text = text.strip().lower()
     text = re.sub(r"[^a-z0-9]+", "_", text)
     text = re.sub(r"_+", "_", text).strip("_")
-    return text or "neurological_condition"
+    return text or "pubmed_results"
 
 
 def build_pubmed_query(condition: str, interventions: list[str], years_back: int = 10) -> str:
@@ -238,7 +238,6 @@ def esearch_pmids(query: str, retmax: int) -> tuple[list[str], int]:
 
     pmids = res.get("IdList", [])
     total_count = int(res.get("Count", 0))
-
     return pmids, total_count
 
 
@@ -544,7 +543,7 @@ search = st.button("Search", type="primary")
 
 
 # -----------------------------
-# Run search
+# Run search and save to session
 # -----------------------------
 if search:
     if not condition.strip() and mode == "Simple":
@@ -569,6 +568,7 @@ if search:
         st.warning("Please enter a longer query.")
         st.stop()
 
+    st.session_state.last_query = q
     pubmed_search_url = build_pubmed_search_url(q)
 
     with st.spinner("Searching PubMed…"):
@@ -579,11 +579,9 @@ if search:
             st.exception(e)
             st.stop()
 
-    search_description = (
-        f'Found {total_count} total matches in PubMed. Displaying up to {len(pmids)}.'
+    st.success(
+        f"Found {total_count} total matches in PubMed. Displaying up to {len(pmids)}."
     )
-
-    st.success(search_description)
     st.link_button("Open in PubMed Search", pubmed_search_url)
 
     time.sleep(0.2)
@@ -596,7 +594,7 @@ if search:
             st.exception(e)
             st.stop()
 
-    st.session_state["pubmed_results_df"] = df
+    st.session_state.pubmed_results_df = df
     st.session_state.pubmed_chat_messages = []
     st.session_state.evidence_snapshot = ""
 
@@ -604,59 +602,54 @@ if search:
         with st.spinner("Creating evidence snapshot…"):
             st.session_state.evidence_snapshot = summarize_pubmed_results(df, client)
 
-    # -----------------------------
-    # Evidence snapshot
-    # -----------------------------
+
+# -----------------------------
+# Display saved search results
+# -----------------------------
+results_df = st.session_state.get("pubmed_results_df", pd.DataFrame())
+
+if not results_df.empty:
+
     if st.session_state.get("evidence_snapshot"):
         st.subheader("Evidence Snapshot")
         st.markdown(st.session_state.evidence_snapshot)
 
-    # -----------------------------
-    # Abstract previews
-    # -----------------------------
     st.subheader("Abstract Previews")
     st.caption("Showing up to 10 abstracts from the returned PubMed results.")
 
-    if df.empty:
-        st.info("No records found.")
-    else:
-        preview_df = df.head(10)
+    preview_df = results_df.head(10)
 
-        for _, row in preview_df.iterrows():
-            expander_title = f"{row['Year']} — {row['Title']}"
+    for _, row in preview_df.iterrows():
+        expander_title = f"{row['Year']} — {row['Title']}"
 
-            with st.expander(expander_title):
-                st.markdown(f"**Journal:** {row['Journal']}")
-                st.markdown(f"**Authors:** {row['Authors']}")
+        with st.expander(expander_title):
+            st.markdown(f"**Journal:** {row['Journal']}")
+            st.markdown(f"**Authors:** {row['Authors']}")
 
-                if row.get("PMID"):
-                    st.markdown(f"**PMID:** [{row['PMID']}]({row['PMID_URL']})")
+            if row.get("PMID"):
+                st.markdown(f"**PMID:** [{row['PMID']}]({row['PMID_URL']})")
 
-                if row.get("DOI"):
-                    st.markdown(f"**DOI:** [{row['DOI']}]({row['DOI_URL']})")
+            if row.get("DOI"):
+                st.markdown(f"**DOI:** [{row['DOI']}]({row['DOI_URL']})")
 
-                abstract_text = row.get("Abstract", "")
+            abstract_text = row.get("Abstract", "")
 
-                if abstract_text:
-                    st.markdown("**Abstract**")
-                    st.write(abstract_text)
-                else:
-                    st.caption("No abstract available in the PubMed record.")
+            if abstract_text:
+                st.markdown("**Abstract**")
+                st.write(abstract_text)
+            else:
+                st.caption("No abstract available in the PubMed record.")
 
-    # -----------------------------
-    # Download results
-    # -----------------------------
     st.subheader("Download Results")
 
-    filename_condition = clean_filename(condition)
-    filename_category = clean_filename(selected_category)
+    file_stub = clean_filename(st.session_state.get("last_query", "pubmed_results"))
 
     st.download_button(
         "Download your results",
-        data=df.drop(columns=["PMID_URL", "DOI_URL"], errors="ignore")
+        data=results_df.drop(columns=["PMID_URL", "DOI_URL"], errors="ignore")
         .to_csv(index=False)
         .encode("utf-8"),
-        file_name=f"pubmed_results_{filename_condition}_{filename_category}.csv",
+        file_name=f"{file_stub}.csv",
         mime="text/csv",
     )
 
@@ -665,8 +658,6 @@ if search:
 # Chatbot
 # -----------------------------
 st.subheader("Chat with these PubMed results")
-
-results_df = st.session_state.get("pubmed_results_df", pd.DataFrame())
 
 if results_df.empty:
     st.info("Run a PubMed search first, then you can chat with the returned results.")
