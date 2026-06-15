@@ -17,7 +17,7 @@ from openai import OpenAI
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
 st.title("PubMed Search Tool")
 st.caption("Public search interface powered by NCBI PubMed (Entrez)")
-st.caption("Developed by Branch Out Neurological Foundation")
+st.caption("Developed by Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation")
 st.caption(
     "This search is being conducted on journal articles indexed in the National Library of Medicine, "
     "PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
