@@ -359,15 +359,7 @@ def efetch_details(pmids: list[str]) -> pd.DataFrame:
 # -----------------------------
 st.sidebar.header("Search settings")
 
-mode = st.radio(
-    "Search mode",
-    ["Simple", "Advanced"],
-    horizontal=True,
-    help=(
-        "Simple mode uses friendly menus only. "
-        "Advanced mode lets you add custom terms or edit the full PubMed query."
-    ),
-)
+st.subheader("Search setup")
 
 selected_condition = st.selectbox(
     "Choose a neurological condition",
@@ -468,49 +460,10 @@ auto_query = (
     else ""
 )
 
-if mode == "Advanced":
-    st.subheader("Advanced query builder")
+query = auto_query
 
-    user_terms = st.text_input(
-        "Add your own search terms",
-        value="",
-        help="Example: fatigue, cognition, inflammation, microbiome, sleep, quality of life",
-    )
-
-    use_auto_query = st.checkbox(
-        "Include the selected condition and intervention filters",
-        value=True,
-    )
-
-    extra_terms = normalize_query(user_terms)
-
-    if use_auto_query:
-        if extra_terms and auto_query:
-            query = f"{auto_query} AND ({extra_terms})"
-        elif auto_query:
-            query = auto_query
-        else:
-            query = extra_terms
-    else:
-        query = extra_terms
-
-    st.caption("Final PubMed query")
+with st.expander("Preview generated PubMed query"):
     st.code(query, language="text")
-
-    with st.expander("Edit full PubMed query manually"):
-        query = st.text_area(
-            "PubMed query",
-            value=query,
-            height=180,
-        )
-
-else:
-    query = auto_query
-
-    st.subheader("Search setup")
-
-    with st.expander("Preview generated PubMed query"):
-        st.code(query, language="text")
 
 
 search = st.button("Search", type="primary")
@@ -520,16 +473,12 @@ search = st.button("Search", type="primary")
 # Run search and save to session
 # -----------------------------
 if search:
-    if not condition.strip() and mode == "Simple":
+    if not condition.strip():
         st.warning("Please choose or enter a neurological condition.")
         st.stop()
-
-    if not interventions and mode == "Simple":
+    
+    if not interventions:
         st.warning("Please select at least one intervention term.")
-        st.stop()
-
-    if mode == "Advanced" and not normalize_query(query):
-        st.warning("Please enter search terms or include the selected filters.")
         st.stop()
 
     if not allow_search(max_per_minute=int(max_per_minute)):
