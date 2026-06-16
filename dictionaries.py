@@ -28,8 +28,6 @@ COMMON_CONDITIONS = [
 INTERVENTION_CATEGORIES = {
 
     "Mind-body": [
-        "exercise",
-        "physical activity",
         "mindfulness",
         "meditation",
         "yoga",
@@ -37,14 +35,32 @@ INTERVENTION_CATEGORIES = {
         "qigong",
     ],
 
-    "Nutraceuticals / diet": [
+    "Exercise": [
+        "exercise",
+        "physical activity",
+        "yoga",
+    ],
+  
+    "Diet": [
+        "Mediterranean",
+        "Paleo",
+        "MIND",
+        "Ketogencic",
         "diet",
         "nutrition",
-        "ketogenic diet",
-        "Mediterranean diet",
+    ],
+    
+    "Nutraceuticals": [
         "probiotics",
         "omega-3",
         "vitamin D",
+        "microbiome",
+        "fecal transplants",
+        "microbiome treatments",
+        "prebiotics",
+        "byturic acid",
+        "fish oils",
+        "hyperbaric oxygen",
     ],
 
     "Neurotechnology": [
@@ -54,6 +70,8 @@ INTERVENTION_CATEGORIES = {
         "neurofeedback",
         "biofeedback",
         "deep brain stimulation"
+        "vagus nerve stimulation",
+        "red light therapy"
     ],
     
 }
