@@ -20,7 +20,6 @@ from dictionaries import (
 
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
 st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyond pharma.")
-st.caption("powered by PubMed (Entrez)")
 st.caption(
     "This search is being conducted on journal articles indexed in the National Library of Medicine, "
     "PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
@@ -684,3 +683,4 @@ st.caption(
     "Data source: NCBI PubMed via Entrez. This tool provides literature search results only and does not provide medical advice."
 )
 st.caption("Developed by: Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation, Calgary, Alberta, Canada")
+st.caption("powered by: PubMed (Entrez)")
