@@ -422,7 +422,9 @@ else:
         help="Choose one or more intervention terms.",
     )
 
-##OTHER UI CONTROLS
+# ------------------
+# OTHER UI CONTROLS
+# ------------------
 
 retmax = st.sidebar.slider(
     "Max results to display",
@@ -534,8 +536,18 @@ if search:
         st.stop()
 
     st.session_state.last_query = q
+    st.session_state.search_summary = {
+    "condition": condition,
+    "selected_category": selected_category,
+    "interventions": interventions,
+    "years_back": years_back,
+    "total_count": total_count if "total_count" in locals() else None,
+    "displayed_count": len(pmids) if "pmids" in locals() else None,
+    "pubmed_url": build_pubmed_search_url(q),
+}
     pubmed_search_url = build_pubmed_search_url(q)
 
+    
     with st.spinner("Searching PubMed…"):
         try:
             pmids, total_count = esearch_pmids(q, int(retmax))
