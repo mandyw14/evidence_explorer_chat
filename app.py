@@ -19,7 +19,12 @@ from dictionaries import (
 )
 
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
-st.title("PubMed Search Tool")
+st.title("Evidence Explorer - Explore the science of treatments for neurological conditions that go beyound pharma.")
+st.subtitle(
+    "This search engine hones in on the science of complementary and alternative approaches." 
+    "Our goal in offering this explorer is to help non-scientists interact with the science" 
+    "so you can be more informed about about all the options available to you that are evidence-based"
+    )   
 st.caption("Public search interface powered by NCBI PubMed (Entrez)")
 st.caption("Developed by Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation")
 st.caption(
