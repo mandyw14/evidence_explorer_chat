@@ -19,12 +19,8 @@ from dictionaries import (
 )
 
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
-st.title("Evidence Explorer -- explore the science of treatments for neurological conditions that go beyound pharma.")
-st.caption(
-    "This search engine allows non-scientists to explore the science of complementary and alternative treatments." 
-    )   
-st.caption("Public search interface powered by NCBI PubMed (Entrez)")
-st.caption("Developed by Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation")
+st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyound pharma.")
+st.caption("powered by PubMed (Entrez)")
 st.caption(
     "This search is being conducted on journal articles indexed in the National Library of Medicine, "
     "PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
@@ -34,6 +30,7 @@ st.caption(
     "This search prioritizes human clinical studies, clinical trials, reviews, and evidence syntheses "
     "published in English within the selected date range."
 )
+st.caption("Developed by Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation")
 
 
 # -----------------------------
