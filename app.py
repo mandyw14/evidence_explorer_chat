@@ -369,11 +369,11 @@ if selected_condition == "Other / type your own":
 else:
     condition = selected_condition
 
-category_names = list(INTERVENTION_CATEGORIES.keys())
 
 # -----------------------------
 # Intervention selection
 # -----------------------------
+category_names = list(INTERVENTION_CATEGORIES.keys())
 
 selected_category = st.selectbox(
     "Choose an intervention category",
@@ -381,19 +381,20 @@ selected_category = st.selectbox(
     index=0,
 )
 
-intervention_options = (
-    INTERVENTION_CATEGORIES[selected_category]
-    + ["Other / type your own"]
-)
+intervention_options = INTERVENTION_CATEGORIES[selected_category] + [
+    "Other / type your own"
+]
 
-selected_intervention = st.selectbox(
-    "Choose an intervention",
+selected_interventions = st.multiselect(
+    "Choose intervention term(s)",
     options=intervention_options,
-    index=0,
+    default=INTERVENTION_CATEGORIES[selected_category][:2],
+    help="Choose one or more intervention terms. Select 'Other / type your own' to add a custom term.",
 )
 
-if selected_intervention == "Other / type your own":
+custom_intervention = ""
 
+if "Other / type your own" in selected_interventions:
     custom_intervention = st.text_input(
         "Type your intervention",
         value="",
@@ -403,14 +404,13 @@ if selected_intervention == "Other / type your own":
         ),
     )
 
-    interventions = (
-        [custom_intervention]
-        if custom_intervention.strip()
-        else []
-    )
+interventions = [
+    term for term in selected_interventions
+    if term != "Other / type your own"
+]
 
-else:
-    interventions = [selected_intervention]
+if custom_intervention.strip():
+    interventions.append(custom_intervention.strip())
 
 retmax = st.sidebar.slider(
     "Max results to display",
