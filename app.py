@@ -380,24 +380,27 @@ selected_category = st.selectbox(
     index=0,
 )
 
-# Real interventions only
 category_terms = INTERVENTION_CATEGORIES[selected_category]
 
-# Add custom option separately
-intervention_options = category_terms + [
-    "Other / type your own"
-]
+select_all_interventions = st.checkbox(
+    "Select all interventions in this category",
+    value=False,
+)
+
+if select_all_interventions:
+    default_interventions = category_terms
+else:
+    default_interventions = category_terms[:2]
+
+intervention_options = category_terms + ["Other / type your own"]
 
 selected_interventions = st.multiselect(
     "Choose intervention term(s)",
     options=intervention_options,
-
-    # Select all real terms, but NOT custom option
-    default=category_terms,
-
+    default=default_interventions,
     help=(
         "Choose one or more intervention terms. "
-        "Select 'Other / type your own' to add a custom term."
+        "Select 'Other / type your own' only if you want to add a custom term."
     ),
 )
 
@@ -407,24 +410,19 @@ if "Other / type your own" in selected_interventions:
     custom_intervention = st.text_input(
         "Type your intervention",
         value="",
-        help=(
-            "Enter any intervention, treatment, lifestyle factor, "
-            "technology, or approach you would like to search."
-        ),
+        help="Enter any intervention, treatment, lifestyle factor, technology, or approach.",
     )
 
-
-# Remove the placeholder from actual PubMed query
 interventions = [
     term
     for term in selected_interventions
     if term != "Other / type your own"
 ]
 
-
-# Add custom term only if entered
 if custom_intervention.strip():
     interventions.append(custom_intervention.strip())
+
+##OTHER UI CONTROLS
 
 retmax = st.sidebar.slider(
     "Max results to display",
