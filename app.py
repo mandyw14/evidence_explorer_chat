@@ -19,10 +19,7 @@ from dictionaries import (
 )
 
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
-st.title(
-    "Evidence Explorer" 
-    "explore the science of treatments for neurological conditions that go beyound pharma."
-)
+st.title("Evidence Explorer -- explore the science of treatments for neurological conditions that go beyound pharma.")
 st.caption(
     "This search engine allows non-scientists to explore the science of complementary and alternative treatments." 
     )   
