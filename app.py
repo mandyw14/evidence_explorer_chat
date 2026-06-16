@@ -30,7 +30,7 @@ st.caption(
     "This search prioritizes human clinical studies, clinical trials, reviews, and evidence syntheses "
     "published in English within the selected date range."
 )
-st.caption("Developed by Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation")
+st.divider()
 
 
 # -----------------------------
@@ -683,3 +683,4 @@ st.divider()
 st.caption(
     "Data source: NCBI PubMed via Entrez. This tool provides literature search results only and does not provide medical advice."
 )
+st.caption("Developed by: Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation, Calgary, Alberta, Canada")
