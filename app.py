@@ -19,7 +19,7 @@ from dictionaries import (
 )
 
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
-st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyound pharma.")
+st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyond pharma.")
 st.caption("powered by PubMed (Entrez)")
 st.caption(
     "This search is being conducted on journal articles indexed in the National Library of Medicine, "
