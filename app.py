@@ -490,19 +490,11 @@ if mode == "Advanced":
 
 else:
     query = auto_query
-    st.subheader("Search summary")
-    st.write(f"**Condition:** {condition if condition else 'Not selected'}")
-    st.write(f"**Intervention category:** {selected_category}")
-
-    st.write(
-        f"**Intervention term(s):** {', '.join(interventions) if interventions else 'Not selected'}"
-    )
-  
-    st.write(f"**Date filter:** Past {years_back} years")
+    st.subheader("Search setup")
 
     with st.expander("Preview generated PubMed query"):
         st.code(query, language="text")
-
+    
 search = st.button("Search", type="primary")
 
 
