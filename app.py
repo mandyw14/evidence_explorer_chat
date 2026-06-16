@@ -21,9 +21,9 @@ from dictionaries import (
 st.set_page_config(page_title="PubMed Search Tool", layout="wide")
 st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyond pharma.")
 st.caption(
-    "This search is being conducted on journal articles indexed in the National Library of Medicine, "
+    "This search is being conducted on scientific journal articles indexed in the National Library of Medicine, "
     "PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
-    "life science journals, and online books."
+    "life science journals, and online books. It is a credible source of scientific information."
 )
 st.caption(
     "This search prioritizes human clinical studies, clinical trials, reviews, and evidence syntheses "
