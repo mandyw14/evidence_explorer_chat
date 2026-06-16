@@ -577,10 +577,41 @@ results_df = st.session_state.get("pubmed_results_df", pd.DataFrame())
 
 if not results_df.empty:
 
+    # -----------------------------
+    # Search summary
+    # -----------------------------
+    summary = st.session_state.get("search_summary", {})
+
+    if summary:
+        st.subheader("Search Summary")
+
+        st.write(f"**Condition:** {summary.get('condition', 'Not selected')}")
+        st.write(
+            f"**Intervention category:** {summary.get('selected_category', 'Not selected')}"
+        )
+        st.write(
+            f"**Intervention term(s):** "
+            f"{', '.join(summary.get('interventions', [])) if summary.get('interventions') else 'Not selected'}"
+        )
+        st.write(f"**Date filter:** Past {summary.get('years_back', 'N/A')} years")
+        st.write(
+            f"**PubMed matches:** {summary.get('total_count', 0)} total; "
+            f"displaying {summary.get('displayed_count', 0)}"
+        )
+
+        if summary.get("pubmed_url"):
+            st.link_button("Open in PubMed", summary["pubmed_url"])
+
+    # -----------------------------
+    # Evidence snapshot
+    # -----------------------------
     if st.session_state.get("evidence_snapshot"):
         st.subheader("Evidence Snapshot")
         st.markdown(st.session_state.evidence_snapshot)
 
+    # -----------------------------
+    # Abstract previews
+    # -----------------------------
     st.subheader("Abstract Previews")
     st.caption("Showing up to 10 abstracts from the returned PubMed results.")
 
@@ -607,8 +638,14 @@ if not results_df.empty:
             else:
                 st.caption("No abstract available in the PubMed record.")
 
+    # -----------------------------
+    # Download results
+    # -----------------------------
     st.subheader("Save your Results")
-    st.caption("You can download your search results into a file so you can come back and read/review them at a later time.")
+    st.caption(
+        "You can download your search results into a file so you can come back "
+        "and read/review them at a later time."
+    )
 
     file_stub = clean_filename(st.session_state.get("last_query", "pubmed_results"))
 
