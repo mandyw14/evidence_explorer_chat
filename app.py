@@ -18,17 +18,25 @@ from dictionaries import (
     INTERVENTION_CATEGORIES,
 )
 
-st.set_page_config(page_title="PubMed Search Tool", layout="wide")
+
+# -----------------------------
+# Page config
+# -----------------------------
+st.set_page_config(page_title="Evidence Explorer", layout="wide")
+
 st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyond pharma.")
+
 st.caption(
     "This search is being conducted on scientific journal articles indexed in the National Library of Medicine, "
     "PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
     "life science journals, and online books. It is a credible source of scientific information."
 )
+
 st.caption(
     "This search prioritizes human clinical studies, clinical trials, reviews, and evidence syntheses "
     "published in English within the selected date range."
 )
+
 st.divider()
 
 
@@ -73,6 +81,9 @@ if "evidence_snapshot" not in st.session_state:
 if "last_query" not in st.session_state:
     st.session_state.last_query = ""
 
+if "search_summary" not in st.session_state:
+    st.session_state.search_summary = {}
+
 
 # -----------------------------
 # Utilities
@@ -111,8 +122,10 @@ def build_pubmed_query(condition: str, interventions: list[str], years_back: int
 
     intervention_terms = []
     for item in interventions:
-        intervention_terms.append(f'"{item}"[MeSH Terms]')
-        intervention_terms.append(f'"{item}"[Title/Abstract]')
+        item = item.strip()
+        if item:
+            intervention_terms.append(f'"{item}"[MeSH Terms]')
+            intervention_terms.append(f'"{item}"[Title/Abstract]')
 
     intervention_block = "(" + " OR ".join(intervention_terms) + ")"
 
@@ -241,6 +254,7 @@ def esearch_pmids(query: str, retmax: int) -> tuple[list[str], int]:
 
     pmids = res.get("IdList", [])
     total_count = int(res.get("Count", 0))
+
     return pmids, total_count
 
 
@@ -349,10 +363,11 @@ mode = st.radio(
     "Search mode",
     ["Simple", "Advanced"],
     horizontal=True,
-    help="Simple mode uses friendly menus only. Advanced mode lets you add custom terms or edit the full PubMed query.",
+    help=(
+        "Simple mode uses friendly menus only. "
+        "Advanced mode lets you add custom terms or edit the full PubMed query."
+    ),
 )
-
-options=COMMON_CONDITIONS
 
 selected_condition = st.selectbox(
     "Choose a neurological condition",
@@ -373,7 +388,6 @@ else:
 # -----------------------------
 # Intervention selection
 # -----------------------------
-
 category_options = list(INTERVENTION_CATEGORIES.keys()) + [
     "Other / type your own"
 ]
@@ -385,7 +399,6 @@ selected_category = st.selectbox(
 )
 
 if selected_category == "Other / type your own":
-
     custom_intervention = st.text_input(
         "Type your intervention",
         value="",
@@ -402,7 +415,6 @@ if selected_category == "Other / type your own":
     )
 
 else:
-
     category_terms = INTERVENTION_CATEGORIES[selected_category]
 
     select_all_interventions = st.checkbox(
@@ -422,8 +434,10 @@ else:
         help="Choose one or more intervention terms.",
     )
 
-##OTHER UI CONTROLS
 
+# -----------------------------
+# Other UI controls
+# -----------------------------
 retmax = st.sidebar.slider(
     "Max results to display",
     min_value=10,
@@ -450,7 +464,7 @@ years_back = st.sidebar.slider(
 
 auto_query = (
     build_pubmed_query(condition, interventions, years_back=years_back)
-    if condition.strip()
+    if condition.strip() and interventions
     else ""
 )
 
@@ -471,10 +485,12 @@ if mode == "Advanced":
     extra_terms = normalize_query(user_terms)
 
     if use_auto_query:
-        if extra_terms:
+        if extra_terms and auto_query:
             query = f"{auto_query} AND ({extra_terms})"
-        else:
+        elif auto_query:
             query = auto_query
+        else:
+            query = extra_terms
     else:
         query = extra_terms
 
@@ -490,13 +506,14 @@ if mode == "Advanced":
 
 else:
     query = auto_query
+
     st.subheader("Search setup")
 
     with st.expander("Preview generated PubMed query"):
         st.code(query, language="text")
-    
-search = st.button("Search", type="primary")
 
+
+search = st.button("Search", type="primary")
 
 
 # -----------------------------
@@ -527,17 +544,6 @@ if search:
 
     st.session_state.last_query = q
 
-    st.session_state.search_summary = {
-    "condition": condition,
-    "selected_category": selected_category,
-    "interventions": interventions,
-    "years_back": years_back,
-    "total_count": total_count if "total_count" in locals() else None,
-    "displayed_count": len(pmids) if "pmids" in locals() else None,
-    "pubmed_url": build_pubmed_search_url(q),
-}
-#    pubmed_search_url = build_pubmed_search_url(q)
-
     with st.spinner("Searching PubMed…"):
         try:
             pmids, total_count = esearch_pmids(q, int(retmax))
@@ -546,10 +552,21 @@ if search:
             st.exception(e)
             st.stop()
 
+    pubmed_search_url = build_pubmed_search_url(q)
+
+    st.session_state.search_summary = {
+        "condition": condition,
+        "selected_category": selected_category,
+        "interventions": interventions,
+        "years_back": years_back,
+        "total_count": total_count,
+        "displayed_count": len(pmids),
+        "pubmed_url": pubmed_search_url,
+    }
+
     st.success(
         f"Found {total_count} total matches in PubMed. Displaying up to {len(pmids)}."
     )
-    st.link_button("Open in PubMed Search", pubmed_search_url)
 
     time.sleep(0.2)
 
@@ -586,14 +603,19 @@ if not results_df.empty:
         st.subheader("Search Summary")
 
         st.write(f"**Condition:** {summary.get('condition', 'Not selected')}")
+
         st.write(
-            f"**Intervention category:** {summary.get('selected_category', 'Not selected')}"
+            f"**Intervention category:** "
+            f"{summary.get('selected_category', 'Not selected')}"
         )
+
         st.write(
             f"**Intervention term(s):** "
             f"{', '.join(summary.get('interventions', [])) if summary.get('interventions') else 'Not selected'}"
         )
+
         st.write(f"**Date filter:** Past {summary.get('years_back', 'N/A')} years")
+
         st.write(
             f"**PubMed matches:** {summary.get('total_count', 0)} total; "
             f"displaying {summary.get('displayed_count', 0)}"
@@ -642,6 +664,7 @@ if not results_df.empty:
     # Download results
     # -----------------------------
     st.subheader("Save your Results")
+
     st.caption(
         "You can download your search results into a file so you can come back "
         "and read/review them at a later time."
@@ -666,8 +689,10 @@ st.subheader("Chat with these PubMed results")
 
 if results_df.empty:
     st.info("Run a PubMed search first, then you can chat with the returned results.")
+
 elif client is None:
     st.warning("Add OPENAI_API_KEY to Streamlit secrets to enable the chatbot.")
+
 else:
     st.caption("The chatbot answers only from the PubMed records returned by your search.")
 
@@ -758,8 +783,13 @@ Returned PubMed results:
 
 
 st.divider()
+
 st.caption(
     "Data source: NCBI PubMed via Entrez. This tool provides literature search results only and does not provide medical advice."
 )
-st.caption("Developed by: Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation, Calgary, Alberta, Canada")
-st.caption("powered by: PubMed (Entrez)")
+
+st.caption(
+    "Developed by: Mandy Wintink, Ph.D., Research Director at Branch Out Neurological Foundation, Calgary, Alberta, Canada"
+)
+
+st.caption("Powered by: PubMed (Entrez)")
