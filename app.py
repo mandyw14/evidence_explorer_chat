@@ -374,53 +374,53 @@ else:
 # Intervention selection
 # -----------------------------
 
+category_options = list(INTERVENTION_CATEGORIES.keys()) + [
+    "Other / type your own"
+]
+
 selected_category = st.selectbox(
     "Choose an intervention category",
-    options=list(INTERVENTION_CATEGORIES.keys()),
+    options=category_options,
     index=0,
 )
 
-category_terms = INTERVENTION_CATEGORIES[selected_category]
+if selected_category == "Other / type your own":
 
-select_all_interventions = st.checkbox(
-    "Select all interventions in this category",
-    value=False,
-)
-
-if select_all_interventions:
-    default_interventions = category_terms
-else:
-    default_interventions = category_terms[:2]
-
-intervention_options = category_terms + ["Other / type your own"]
-
-selected_interventions = st.multiselect(
-    "Choose intervention term(s)",
-    options=intervention_options,
-    default=default_interventions,
-    help=(
-        "Choose one or more intervention terms. "
-        "Select 'Other / type your own' only if you want to add a custom term."
-    ),
-)
-
-custom_intervention = ""
-
-if "Other / type your own" in selected_interventions:
     custom_intervention = st.text_input(
         "Type your intervention",
         value="",
-        help="Enter any intervention, treatment, lifestyle factor, technology, or approach.",
+        help=(
+            "Enter any intervention, treatment, lifestyle factor, "
+            "technology, or approach you would like to search."
+        ),
     )
 
-interventions = [
-    term
-    for term in selected_interventions
-    if term != "Other / type your own"
-]
+    interventions = (
+        [custom_intervention.strip()]
+        if custom_intervention.strip()
+        else []
+    )
 
-if custom_intervention.strip():
-    interventions.append(custom_intervention.strip())
+else:
+
+    category_terms = INTERVENTION_CATEGORIES[selected_category]
+
+    select_all_interventions = st.checkbox(
+        "Select all interventions in this category",
+        value=False,
+    )
+
+    if select_all_interventions:
+        default_interventions = category_terms
+    else:
+        default_interventions = category_terms[:2]
+
+    interventions = st.multiselect(
+        "Choose intervention term(s)",
+        options=category_terms,
+        default=default_interventions,
+        help="Choose one or more intervention terms.",
+    )
 
 ##OTHER UI CONTROLS
 
@@ -493,16 +493,18 @@ else:
     st.subheader("Search summary")
     st.write(f"**Condition:** {condition if condition else 'Not selected'}")
     st.write(f"**Intervention category:** {selected_category}")
-    
+
     st.write(
-        f"**Intervention:** {interventions[0] if interventions else 'Not selected'}"
+        f"**Intervention term(s):** {', '.join(interventions) if interventions else 'Not selected'}"
     )
+  
     st.write(f"**Date filter:** Past {years_back} years")
 
     with st.expander("Preview generated PubMed query"):
         st.code(query, language="text")
 
 search = st.button("Search", type="primary")
+
 
 
 # -----------------------------
