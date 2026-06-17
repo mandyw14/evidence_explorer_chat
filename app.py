@@ -398,6 +398,7 @@ selected_category = st.selectbox(
         "Then you can choose one or more from within that category"
         "You can also 'type your own' if you know specifically what you are looking for"
         "For example, if you are interested in a specific nutraceutical like 'creatine'"
+    ),
 )
 
 if selected_category == "Other / type your own":
