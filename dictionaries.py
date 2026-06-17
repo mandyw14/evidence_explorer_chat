@@ -40,7 +40,7 @@ INTERVENTION_CATEGORIES = {
         "yoga",
     ],
   
-    "Diet": [
+    "Diet & Nutrition": [
         "Mediterranean",
         "Paleo",
         "MIND",
@@ -49,6 +49,9 @@ INTERVENTION_CATEGORIES = {
         "nutrition",
         "vegetarian",
         "vegan",
+        "antioxidant"
+        "high-protein diet",
+        "low-fat diet",
     ],
     
     "Nutraceuticals": [
@@ -62,6 +65,7 @@ INTERVENTION_CATEGORIES = {
         "byturic acid",
         "fish oils",
         "hyperbaric oxygen",
+        "antioxidants",
     ],
 
     "Neurotechnology": [
