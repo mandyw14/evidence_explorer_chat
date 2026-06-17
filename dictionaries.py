@@ -47,6 +47,8 @@ INTERVENTION_CATEGORIES = {
         "Ketogencic",
         "diet",
         "nutrition",
+        "vegetarian",
+        "vegan",
     ],
     
     "Nutraceuticals": [
@@ -68,9 +70,9 @@ INTERVENTION_CATEGORIES = {
         "focused ultrasound",
         "neurofeedback",
         "biofeedback",
-        "deep brain stimulation"
+        "deep brain stimulation",
         "vagus nerve stimulation",
-        "red light therapy"
+        "red light therapy",
     ],
     
 }
@@ -143,4 +145,19 @@ It also includes neurofeedback technology. Generally, this also includes the ter
         ],
         "video": ""
     },
+
+        "Diet": {
+        "description": """
+There are so many different kids of diets that exist, including, vegan, vegetarian, paleo diets, ketogenic diets, the MIND diet, 
+and mediterranean diets. 
+""",
+        "examples": [
+            "Ketogenic diet",
+            "MIND diet",
+            "Vegetarian diet",
+        ],
+        "video": ""
+    },
+}
+
 }
