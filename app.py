@@ -365,7 +365,6 @@ st.caption(
     "Start your search by choosing a neurological condition"
     "Select from one of the common conditions or type one if it's not listed"
 )
-
 selected_condition = st.selectbox(
     "Choose a common neurological condition from the list below or type in your condition of interest.",
     options=COMMON_CONDITIONS,
