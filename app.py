@@ -24,7 +24,7 @@ from dictionaries import (
 # -----------------------------
 st.set_page_config(page_title="Evidence Explorer", layout="wide")
 
-st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyond pharma.")
+st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyond pharma")
 
 st.caption(
     "This search is being conducted on scientific journal articles indexed in the National Library of Medicine, "
@@ -360,8 +360,7 @@ def efetch_details(pmids: list[str]) -> pd.DataFrame:
 st.sidebar.header("Search settings")
 
 st.subheader("Search setup")
-
-st.caption(
+st.subheader(
     "Start your search by choosing a neurological condition"
     "Select from one of the common conditions or type one if it's not listed"
 )
