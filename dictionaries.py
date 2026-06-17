@@ -52,6 +52,7 @@ INTERVENTION_CATEGORIES = {
         "antioxidant"
         "high-protein diet",
         "low-fat diet",
+        "low-carbohydrate diet",
     ],
     
     "Nutraceuticals": [
