@@ -150,7 +150,7 @@ It also includes neurofeedback technology. Generally, this also includes the ter
         "video": ""
     },
 
-        "Diet": {
+        "Diet & Nutrition": {
         "description": """
 There are so many different kids of diets that exist, including, vegan, vegetarian, paleo diets, ketogenic diets, the MIND diet, 
 and mediterranean diets. 
