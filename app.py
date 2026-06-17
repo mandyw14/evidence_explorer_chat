@@ -360,10 +360,15 @@ def efetch_details(pmids: list[str]) -> pd.DataFrame:
 st.sidebar.header("Search settings")
 
 st.subheader("Search setup")
-st.subheader(
-    "Start your search by choosing a neurological condition"
-    "Select from one of the common conditions or type one if it's not listed"
+
+st.markdown(
+    """
+    Start your search by choosing a neurological condition
+    Select from one of the common conditions or type one if it's not listed
+
+    """
 )
+
 selected_condition = st.selectbox(
     "Choose a common neurological condition from the list below or type in your condition of interest.",
     options=COMMON_CONDITIONS,
