@@ -393,11 +393,11 @@ selected_category = st.selectbox(
     options=category_options,
     index=0,
     help=(
-        "These are organized into categories to help narrow a search"
-        "Once you choose a category treatments that fall within that category will show up"
-        "Then you can choose one or more from within that category"
-        "You can also 'type your own' if you know specifically what you are looking for"
-        "For example, if you are interested in a specific nutraceutical like 'creatine'"
+        "These are organized into categories to help narrow a search. "
+        "Once you choose a category treatments that fall within that category will show up. "
+        "Then you can choose one or more from within that category. "
+        "You can also 'type your own' if you know specifically what you are looking for, "
+        "for example, if you are interested in a specific nutraceutical like 'creatine'."
     ),
 )
 
