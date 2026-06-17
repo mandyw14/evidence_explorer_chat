@@ -159,5 +159,3 @@ and mediterranean diets.
         "video": ""
     },
 }
-
-}
