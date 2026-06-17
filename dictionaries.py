@@ -24,7 +24,6 @@ COMMON_CONDITIONS = [
     "Other / type your own",
 ]
 
-
 INTERVENTION_CATEGORIES = {
 
     "Mind-body": [
@@ -74,4 +73,63 @@ INTERVENTION_CATEGORIES = {
         "red light therapy"
     ],
     
+}
+
+
+INTERVENTION_DESCRIPTIONS = {
+
+    "Mind-body": {
+        "description": """
+Mind-body approaches explore how behaviours, lifestyle, and experiences 
+can influence brain health and neurological function.
+
+Examples include movement-based approaches, psychological therapies,
+stress regulation practices, and rehabilitation strategies.
+""",
+        "examples": [
+            "exercise",
+            "mindfulness",
+            "yoga",
+            "cognitive behavioural therapy",
+            "rehabilitation",
+        ],
+        "video": ""
+    },
+
+
+    "Nutraceuticals / diet": {
+        "description": """
+Nutraceutical and dietary approaches explore how nutrients, dietary patterns, 
+and naturally occurring compounds may influence neurological health.
+
+Research may examine inflammation, metabolism, the gut-brain connection, 
+cellular energy, or other biological pathways.
+""",
+        "examples": [
+            "omega-3",
+            "vitamin D",
+            "creatine",
+            "probiotics",
+            "ketogenic diet",
+        ],
+        "video": ""
+    },
+
+
+    "Neurotechnology": {
+        "description": """
+Neurotechnology explores tools and devices designed to measure, stimulate,
+or interact with the nervous system.
+
+These approaches may use electrical, magnetic, ultrasound, digital,
+or feedback-based technologies.
+""",
+        "examples": [
+            "transcranial magnetic stimulation",
+            "focused ultrasound",
+            "neurofeedback",
+            "virtual reality",
+        ],
+        "video": ""
+    },
 }
