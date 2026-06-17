@@ -361,15 +361,15 @@ st.sidebar.header("Search settings")
 
 st.subheader("Search setup")
 
-st.info(
-    "Start your search by choosing a neurological condition. "
-    "Select from one of the common conditions or type your own condition if it is not listed."
-)
-
 selected_condition = st.selectbox(
-    "Choose a common neurological condition from the list below or type in your condition of interest.",
+    "Step 1: Choose a neurological condition",
     options=COMMON_CONDITIONS,
     index=0,
+    help=(
+        "Start by choosing a neurological condition. "
+        "Select from one of the common conditions or choose 'Other / type your own' "
+        "if your condition is not listed."
+    ),
 )
 
 if selected_condition == "Other / type your own":
@@ -380,7 +380,6 @@ if selected_condition == "Other / type your own":
     )
 else:
     condition = selected_condition
-
 
 # -----------------------------
 # Intervention selection
