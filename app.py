@@ -361,12 +361,9 @@ st.sidebar.header("Search settings")
 
 st.subheader("Search setup")
 
-st.markdown(
-    """
-    Start your search by choosing a neurological condition
-    Select from one of the common conditions or type one if it's not listed
-
-    """
+st.info(
+    "Start your search by choosing a neurological condition. "
+    "Select from one of the common conditions or type your own condition if it is not listed."
 )
 
 selected_condition = st.selectbox(
