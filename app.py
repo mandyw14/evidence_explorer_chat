@@ -389,9 +389,15 @@ category_options = list(INTERVENTION_CATEGORIES.keys()) + [
 ]
 
 selected_category = st.selectbox(
-    "Choose an intervention category",
+    "Step 2: Choose a treatment or intervention CATEGORY",
     options=category_options,
     index=0,
+    help=(
+        "These are organized into categories to help narrow a search"
+        "Once you choose a category treatments that fall within that category will show up"
+        "Then you can choose one or more from within that category"
+        "You can also 'type your own' if you know specifically what you are looking for"
+        "For example, if you are interested in a specific nutraceutical like 'creatine'"
 )
 
 if selected_category == "Other / type your own":
@@ -619,8 +625,8 @@ if not results_df.empty:
     st.subheader("Save your Results")
 
     st.caption(
-        "You can download your search results into a file so you can come back "
-        "and read/review them at a later time."
+        "You can download your search results into a file"
+        "so you can read/review them at a later time."
     )
 
     file_stub = clean_filename(st.session_state.get("last_query", "pubmed_results"))
