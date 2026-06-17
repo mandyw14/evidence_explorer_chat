@@ -128,20 +128,18 @@ and sometimes practices like yoga or Tai Chi.
         ],
         "video": ""
     },
-        "Mind-body": {
-        "description": """
-Mind-body approaches explore how behaviours, lifestyle, and experiences 
-can influence brain health and neurological function.
 
-Examples include movement-based approaches, psychological therapies,
-stress regulation practices, and rehabilitation strategies.
+    "Neurotechnology": {
+        "description": """
+Neurotechnology involves a variety of technologies that stimulate the brain, both invasively and non-invasively. 
+It also includes neurofeedback technology. Generally, this also includes the term "neuromodulation". 
 """,
         "examples": [
-            "exercise",
-            "mindfulness",
-            "yoga",
-            "cognitive behavioural therapy",
-            "rehabilitation",
+            "Transcranial magnetic stimulation",
+            "vagus nerve stimulation",
+            "neurofeedback",
+            "functional electrical stimulation",
+            "ultrasound",
         ],
         "video": ""
     },
