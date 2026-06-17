@@ -99,7 +99,7 @@ stress regulation practices, and rehabilitation strategies.
     },
 
 
-    "Nutraceuticals / diet": {
+    "Nutraceuticals": {
         "description": """
 Nutraceutical and dietary approaches explore how nutrients, dietary patterns, 
 and naturally occurring compounds may influence neurological health.
