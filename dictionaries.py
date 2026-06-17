@@ -115,20 +115,33 @@ cellular energy, or other biological pathways.
         "video": ""
     },
 
-
-    "Neurotechnology": {
+    "Exercise": {
         "description": """
-Neurotechnology explores tools and devices designed to measure, stimulate,
-or interact with the nervous system.
-
-These approaches may use electrical, magnetic, ultrasound, digital,
-or feedback-based technologies.
+There are many types of exercise that exist. These approaches may include aerobic exercise, resistance/weight training, dance, pilates, 
+and sometimes practices like yoga or Tai Chi.
 """,
         "examples": [
             "transcranial magnetic stimulation",
             "focused ultrasound",
             "neurofeedback",
             "virtual reality",
+        ],
+        "video": ""
+    },
+        "Mind-body": {
+        "description": """
+Mind-body approaches explore how behaviours, lifestyle, and experiences 
+can influence brain health and neurological function.
+
+Examples include movement-based approaches, psychological therapies,
+stress regulation practices, and rehabilitation strategies.
+""",
+        "examples": [
+            "exercise",
+            "mindfulness",
+            "yoga",
+            "cognitive behavioural therapy",
+            "rehabilitation",
         ],
         "video": ""
     },
