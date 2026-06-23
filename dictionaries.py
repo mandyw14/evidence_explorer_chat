@@ -78,6 +78,8 @@ INTERVENTION_CATEGORIES = {
         "deep brain stimulation",
         "vagus nerve stimulation",
         "red light therapy",
+        "electroceutical",
+        "spinal cord stimulation",
     ],
     
 }
