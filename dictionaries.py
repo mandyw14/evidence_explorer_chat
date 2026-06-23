@@ -72,6 +72,7 @@ INTERVENTION_CATEGORIES = {
     "Neurotechnology": [
         "transcranial magnetic stimulation",
         "transcranial direct current stimulation",
+        "intermittent theta burst stimulation",
         "focused ultrasound",
         "neurofeedback",
         "biofeedback",
