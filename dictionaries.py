@@ -26,7 +26,7 @@ COMMON_CONDITIONS = [
 
 INTERVENTION_CATEGORIES = {
 
-   "Complementary Medicine": [],
+   "Complementary Medicine": ["complementary medicine"],
     
     "Mind-body": [
         "mindfulness",
