@@ -30,14 +30,15 @@ st.title("Evidence Explorer -- explore the science of complementary and alternat
 st.caption("Choose any neurological disorder that is of interest to you. Then choose from our list of various types of non-pharmaceutical interventions.")
 
 st.caption(
-    "This search is being conducted on scientific journal articles indexed in the National Library of Medicine, "
+    "A search will be conducted on scientific journal articles indexed in the National Library of Medicine, "
     "PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
     "life science journals, and online books. It is a credible source of scientific information."
 )
 
 st.caption(
     "This search prioritizes human clinical studies, clinical trials, reviews, and evidence syntheses "
-    "published in English within the selected date range."
+    "to provide current, updated information on what is being examined scientifically "
+    "Search results include articles published in English within the past 10 years."
 )
 
 st.divider()
