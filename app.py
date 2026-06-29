@@ -25,9 +25,9 @@ from dictionaries import (
 # -----------------------------
 st.set_page_config(page_title="Evidence Explorer", layout="wide")
 
-st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyond pharma")
+st.title("Evidence Explorer -- explore treatments for neurological conditions that go beyond pharmaceuticals")
 
-st.caption("This is what evidence explorer is for.")
+st.caption("Explore what complementary and alternative therapies exists for the neurological disorder that is of interest to you.")
 
 st.caption(
     "This search is being conducted on scientific journal articles indexed in the National Library of Medicine, "
