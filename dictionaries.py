@@ -38,21 +38,24 @@ INTERVENTION_CATEGORIES = {
         "exercise",
         "physical activity",
         "yoga",
+        "resistance training",
     ],
   
-    "Diet & Nutrition": [
+    "Diets & Nutrition": [
+        "diet",
+        "nutrition",
         "Mediterranean",
         "Paleo",
         "MIND",
-        "Ketogencic",
-        "diet",
+        "Ketogenic",
         "nutrition",
         "vegetarian",
         "vegan",
-        "antioxidant"
+        "antioxidant",
         "high-protein diet",
         "low-fat diet",
         "low-carbohydrate diet",
+        "dietician",
     ],
     
     "Nutraceuticals": [
