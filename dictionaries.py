@@ -88,7 +88,7 @@ INTERVENTION_CATEGORIES = {
         "spinal cord stimulation",
     ],
 
-    “Neurostimulation”: [
+    "Neurostimulation": [
         "Transcranial magnetic stimulation",  "transcranial stimulation",   "rTMS",  "Transcranial Direct Current Stimulation",  "tSCS", 
         "Intermittent theta-burst stimulation", 
          "ultrasound",  "Focused Ultrasound", "transcranial focused ultrasound", 
