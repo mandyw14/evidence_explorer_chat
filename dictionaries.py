@@ -94,14 +94,13 @@ INTERVENTION_CATEGORIES = {
 "Intermittent theta-burst stimulation", 
 
 #OTHERSTIMULATION
- "ultrasound",  ‘Focused Ultrasound", ‘transcranial focused ultrasound’, 
+ "ultrasound",  "Focused Ultrasound", ‘transcranial focused ultrasound’, 
 "Light Flickering Stimulation",   "Epidural Electrical Stimulation",  "electrical stimulation",      
 "Frequency-Domain Near-Infrared Spectroscopy", ‘fNIRS’, 
         "spinal cord stimulation",
         "deep brain stimulation",
         "vagus nerve stimulation",
-]
-
+    ]
 
     
 }
