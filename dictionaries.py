@@ -89,12 +89,11 @@ INTERVENTION_CATEGORIES = {
     ],
 
     “Neurostimulation”: [
-"Transcranial magnetic stimulation",  "transcranial stimulation",   "rTMS",  "Transcranial Direct Current Stimulation",  "tSCS", 
-"Intermittent theta-burst stimulation", 
-
- "ultrasound",  "Focused Ultrasound", ‘transcranial focused ultrasound’, 
-"Light Flickering Stimulation",   "Epidural Electrical Stimulation",  "electrical stimulation",      
-"Frequency-Domain Near-Infrared Spectroscopy", ‘fNIRS’, 
+        "Transcranial magnetic stimulation",  "transcranial stimulation",   "rTMS",  "Transcranial Direct Current Stimulation",  "tSCS", 
+        "Intermittent theta-burst stimulation", 
+         "ultrasound",  "Focused Ultrasound", "transcranial focused ultrasound", 
+        "Light Flickering Stimulation",   "Epidural Electrical Stimulation",  "electrical stimulation",      
+        "Frequency-Domain Near-Infrared Spectroscopy", "fNIRS", 
         "spinal cord stimulation",
         "deep brain stimulation",
         "vagus nerve stimulation",
