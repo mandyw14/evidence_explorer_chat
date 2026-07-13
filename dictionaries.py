@@ -156,14 +156,14 @@ cellular energy, or other biological pathways.
 
     "Exercise": {
         "description": """
-There are many types of exercise that exist. These approaches may include aerobic exercise, resistance/weight training, dance, pilates, 
+There are many types of exercise that exist. These approaches may include aerobic exercise (like a cardio workout), resistance (like lifting weights), or special programs like dance or pilates, 
 and sometimes practices like yoga or Tai Chi.
 """,
         "examples": [
-            "transcranial magnetic stimulation",
-            "focused ultrasound",
-            "neurofeedback",
-            "virtual reality",
+            "resistance training",
+            "aerobic exercise",
+            "weight training",
+            "running",
         ],
         "video": ""
     },
