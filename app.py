@@ -904,7 +904,7 @@ if not results_df.empty:
             if lay_summary:
                 st.markdown("**Plain-language summary**")
                 st.write(lay_summary)
-                st.caption("Generated only from the PubMed title and abstract.")
+                st.caption("AI-generated from the PubMed title and abstract.")
                 st.divider()
 
             st.markdown(f"**Scientific title:** {scientific_title}")
