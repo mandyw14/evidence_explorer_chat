@@ -2,13 +2,14 @@
 
 
 COMMON_CONDITIONS = [
-    "multiple sclerosis",
-    "Parkinson disease",
-    "Alzheimer disease",
+    "Alzheimer's",
     "dementia",
+    "Parkinson's",
     "ADHD",
+    "multiple sclerosis",
     "Other / type your own",
 ]
+
 
 INTERVENTION_CATEGORIES = {
 
