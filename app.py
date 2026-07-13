@@ -26,13 +26,12 @@ from dictionaries import (
 # -----------------------------
 st.set_page_config(page_title="Evidence Explorer", layout="wide")
 
-st.title("Evidence Explorer -- explore the science of complementary and alternative treatments for neurological conditions... treatments that go beyond pharmaceuticals")
-
-st.caption("Choose any neurological disorder that is of interest to you. Then choose from our list of various types of non-pharmaceutical interventions.")
+st.title("Evidence Explorer -- explore the science of complementary and alternative treatments for neurological conditions... solutions that go beyond pharmaceuticals")
 
 st.caption(
-    "A search will be conducted on scientific journal articles indexed in the National Library of Medicine, "
-    "PubMed. PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
+    "Conduct a search on topics of interest by using scientific journal articles indexed in the PubMed," 
+    "the National Library of Medicine (a highly credible source of csientific information)."
+    "PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
     "life science journals, and online books. It is a credible source of scientific information."
 )
 
