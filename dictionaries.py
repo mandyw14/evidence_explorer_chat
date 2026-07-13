@@ -31,7 +31,6 @@ INTERVENTION_CATEGORIES = {
   
     "Diets & Nutrition": [
         "diet",
-        "nutrition",
         "Mediterranean",
         "Paleo",
         "MIND",
@@ -39,11 +38,8 @@ INTERVENTION_CATEGORIES = {
         "nutrition",
         "vegetarian",
         "vegan",
-        "antioxidant",
-        "high-protein diet",
         "low-fat diet",
         "low-carbohydrate diet",
-        "dietician",
     ],
             
     "Supplements & Nutraceuticals": [
