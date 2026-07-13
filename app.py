@@ -38,7 +38,7 @@ st.caption(
 )
 
 st.caption(
-    "NOTES ABOUT THIS SEARCH"
+    "NOTES ABOUT THIS SEARCH:   "
     "This search is set up to prioritize human clinical studies, clinical trials, reviews, and evidence syntheses "
     "to provide current, updated information on what is being examined scientifically. "
     "The search avoids searching non-human studies, which are currently not yet tested clinically in humans. "
