@@ -59,8 +59,10 @@ INTERVENTION_CATEGORIES = {
         "low-carbohydrate diet",
         "dietician",
     ],
-    
-    "Nutraceuticals": [
+            
+    "Supplements & Nutraceuticals": [
+        "supplements",
+        "nutraceuticals",
         "probiotics",
         "omega-3",
         "vitamin D",
@@ -72,7 +74,17 @@ INTERVENTION_CATEGORIES = {
         "fish oils",
         "hyperbaric oxygen",
         "antioxidants",
+        "magnesium"
     ],
+
+    "Gut Health": [
+        "microbiome",
+        "fecal microbiota transplants",
+        "microbiota",
+        "gut health",
+        "probiotic",
+    ],
+    
 
     "Neurotechnology": [
         "transcranial magnetic stimulation",
