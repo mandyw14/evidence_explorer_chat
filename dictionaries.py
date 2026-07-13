@@ -81,18 +81,6 @@ INTERVENTION_CATEGORIES = {
         "electroceutical",
         "spinal cord stimulation",
     ],
-
-    "Neurostimulation": [
-        "Transcranial magnetic stimulation", "Transcranial Direct Current Stimulation", 
-        "Intermittent theta-burst stimulation", 
-         "ultrasound",  "Focused Ultrasound", "transcranial focused ultrasound", 
-        "Light Flickering Stimulation",   "Epidural Electrical Stimulation",  "electrical stimulation",      
-        "Frequency-Domain Near-Infrared Spectroscopy", "fNIRS", 
-        "spinal cord stimulation",
-        "deep brain stimulation",
-        "vagus nerve stimulation",
-    ]
-
     
 }
 
