@@ -582,7 +582,8 @@ selected_condition = st.selectbox(
         "if your condition is not listed."
     ),
 )
-    st.caption("this is how you choose a neurological condition.")
+
+st.caption("this is how you choose a neurological condition.")
 
 
 if selected_condition == "Other / type your own":
