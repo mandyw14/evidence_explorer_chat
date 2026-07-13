@@ -604,7 +604,7 @@ category_options = list(INTERVENTION_CATEGORIES.keys()) + [
 ]
 
 selected_category = st.selectbox(
-    "Step 2: CHOOSE an intervention category or LEARN MORE the categories.",
+    "Step 2: CHOOSE an intervention category. Then choose a specific intervention.",
     options=category_options,
     index=0,
     help=(
