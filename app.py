@@ -575,7 +575,6 @@ st.subheader("Search setup")
 selected_condition = st.selectbox(
     "Step 1: Choose a neurological condition",
     st.caption("this is how you choose a neurological condition.")
-
     options=COMMON_CONDITIONS,
     index=0,
     help=(
