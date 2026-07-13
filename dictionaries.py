@@ -50,8 +50,7 @@ INTERVENTION_CATEGORIES = {
         "fish oils",
         "antioxidants",
         "magnesium"
-    ],
-    
+    ], 
 }
 
 
