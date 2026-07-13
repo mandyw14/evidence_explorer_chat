@@ -30,7 +30,7 @@ st.title("Evidence Explorer -- explore the science of complementary and alternat
 
 st.caption(
     "Conduct a search on topics of interest by using scientific journal articles indexed in the PubMed, " 
-    "the National Library of Medicine (a highly credible source of csientific information). "
+    "the National Library of Medicine (a highly credible source of scientific information). "
     "PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
     "life science journals, and online books. It is a credible source of scientific information."
     "This search will generate plain-language summaries and also connect you directly to PubMed and see your search results. "
