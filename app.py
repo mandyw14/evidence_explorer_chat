@@ -29,16 +29,20 @@ st.set_page_config(page_title="Evidence Explorer", layout="wide")
 st.title("Evidence Explorer -- explore the science of complementary and alternative treatments for neurological conditions... solutions that go beyond pharmaceuticals")
 
 st.caption(
-    "Conduct a search on topics of interest by using scientific journal articles indexed in the PubMed," 
-    "the National Library of Medicine (a highly credible source of csientific information)."
+    "Conduct a search on topics of interest by using scientific journal articles indexed in the PubMed, " 
+    "the National Library of Medicine (a highly credible source of csientific information). "
     "PubMed® comprises more than 39 million citations for biomedical literature from MEDLINE, "
     "life science journals, and online books. It is a credible source of scientific information."
+    "This search will generate plain-language summaries and also connect you directly to PubMed and see your search results. "
+    "You can also download and save your search results."
 )
 
 st.caption(
-    "This search prioritizes human clinical studies, clinical trials, reviews, and evidence syntheses "
-    "to provide current, updated information on what is being examined scientifically "
-    "Search results include articles published in English within the past 10 years."
+    "NOTES ABOUT THIS SEARCH"
+    "This search is set up to prioritize human clinical studies, clinical trials, reviews, and evidence syntheses "
+    "to provide current, updated information on what is being examined scientifically. "
+    "The search avoids searching non-human studies, which are currently not yet tested clinically in humans. "
+    "Search results only includes articles published in English within the past 10 years."
 )
 
 st.divider()
