@@ -13,7 +13,7 @@ COMMON_CONDITIONS = [
 
 INTERVENTION_CATEGORIES = {
 
-   "General Complementary and Alternative Medicine": ["complementary medicine","alternative medicine", "Holistic ", "Integrative Medicine"],
+   "General Complementary and Alternative Medicine": ["complementary medicine","alternative medicine", "Holistic ", "Integrative Medicine", "naturopath",],
     
     "Mind-body": [
         "mindfulness",
@@ -21,6 +21,10 @@ INTERVENTION_CATEGORIES = {
         "yoga",
         "tai chi",
         "qigong",
+        "acupuncture",
+        "massage therapy",
+        "chiropractic",
+        "osteopath",
     ],
 
     "Exercise": [
